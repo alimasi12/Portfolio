@@ -1,109 +1,61 @@
-// NAVBAR SCROLL
-window.addEventListener("scroll", () => {
-    const navbar = document.querySelector(".navbar");
+// querySelector cherche le premier élément correspondant à un sélecteur CSS.
+// Nous mémorisons ces éléments dans des constantes pour les réutiliser facilement.
+const navbar = document.querySelector('.navbar');
+const burger = document.querySelector('#burger');
+const navLinks = document.querySelector('#navLinks');
+// querySelectorAll renvoie plusieurs éléments. [... ] transforme cette collection en vrai tableau.
+const links = [...document.querySelectorAll('.nav-link')];
+const sections = [...document.querySelectorAll('main section, header.hero')];
 
-    if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
-});
-
-// BURGER MENU
-const burger = document.getElementById("burger");
-const navLinks = document.getElementById("navLinks");
-
-burger.onclick = () => {
-   navLinks.classList.toggle("active");
-   burger.classList.toggle("toggle");
-};
-
-// Fermer menu après clic
-document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-    });
-});
-
-// TYPEWRITER
-const text = ["Développeur Web", "Freelancer", "Ingénieur électricien", "Musicien"];
-let i = 0;
-let j = 0;
-let isDeleting = false;
-
-function type() {
-    const el = document.getElementById("typewriter");
-    if (!el) return;
-
-    const current = text[i];
-
-    if (!isDeleting) {
-        el.textContent = current.substring(0, j++);
-        if (j > current.length) {
-            isDeleting = true;
-            return setTimeout(type, 1500); // pause
-        }
-    } else {
-        el.textContent = current.substring(0, j--);
-        if (j < 0) {
-            isDeleting = false;
-            i = (i + 1) % text.length;
-        }
-    }
-
-    setTimeout(type, isDeleting ? 80 : 120);
+// Cette fonction ferme le menu mobile. La centraliser évite de répéter le même code.
+function closeMenu() {
+  // classList.remove retire la classe CSS "open", ce qui remet le menu hors écran.
+  navLinks.classList.remove('open');
+  // aria-expanded informe les technologies d'assistance que le menu est maintenant fermé.
+  burger.setAttribute('aria-expanded', 'false');
+  // Le libellé évolue avec l'état du bouton afin d'être compréhensible sans voir l'icône.
+  burger.setAttribute('aria-label', 'Ouvrir le menu');
 }
 
-type();
-
-
-document.addEventListener("click", (e) => {
-    const isClickInsideMenu = navLinks.contains(e.target);
-    const isClickOnBurger = burger.contains(e.target);
-
-    if (!isClickInsideMenu && !isClickOnBurger) {
-        navLinks.classList.remove("active");
-    }
+// addEventListener écoute une action. Ici, "click" se déclenche quand on clique sur le bouton.
+burger.addEventListener('click', () => {
+  // toggle ajoute "open" si elle manque, et la retire si elle existe déjà.
+  // La valeur retournée (true/false) nous dit si le menu est désormais ouvert.
+  const isOpen = navLinks.classList.toggle('open');
+  // String est nécessaire car les attributs HTML sont toujours du texte.
+  burger.setAttribute('aria-expanded', String(isOpen));
+  // L'opérateur ternaire choisit une valeur selon la condition : condition ? siVrai : siFaux.
+  burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
 });
 
-// SKILL BARS
-const skillFills = document.querySelectorAll(".skill-fill");
-const skillsSection = document.querySelector("#comp");
+// Pour chaque lien du menu, fermer le panneau après la navigation vers une section.
+links.forEach(link => link.addEventListener('click', closeMenu));
+// Escape est la touche attendue pour fermer une interface ouverte ; c'est une bonne pratique UX.
+document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
 
-window.addEventListener("scroll", () => {
-    const trigger = skillsSection.offsetTop - window.innerHeight + 100;
+// Quand l'utilisateur défile, on ajoute une classe au menu pour modifier son apparence.
+window.addEventListener('scroll', () => {
+  // window.scrollY est le nombre de pixels défilés verticalement depuis le haut.
+  // toggle reçoit une deuxième valeur booléenne : la classe est présente seulement si elle est vraie.
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
+// passive:true indique au navigateur que cet écouteur ne bloquera pas le défilement : plus fluide.
+}, { passive: true });
 
-    if (window.scrollY > trigger) {
-        skillFills.forEach(fill => {
-            if (fill.classList.contains("html")) fill.style.width = "90%";
-            if (fill.classList.contains("css")) fill.style.width = "85%";
-            if (fill.classList.contains("js")) fill.style.width = "70%";
-        });
-    }
-});
+// IntersectionObserver est plus performant que calculer sans cesse la position de chaque section.
+// Il avertit notre code lorsqu'une section entre ou sort d'une zone visible de l'écran.
+const observer = new IntersectionObserver(entries => {
+  // entries contient une entrée pour chaque section dont la visibilité a changé.
+  entries.forEach(entry => {
+    // Si la section n'est pas dans la zone observée, nous ne faisons rien.
+    if (!entry.isIntersecting) return;
+    // target est la section concernée. On rend actif le lien dont le href correspond à son id.
+    links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+  });
+// rootMargin réduit volontairement la zone d'observation : un lien devient actif quand la section
+// arrive près du centre de l'écran. threshold:0 suffit dès qu'une partie devient visible.
+}, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
-// PROJECT CARDS ANIMATION
-const projects = document.querySelectorAll(".project-card");
-
-const projectObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
-    });
-}, { threshold: 0.2 });
-
-projects.forEach(card => {
-    card.style.opacity = "0";
-    card.style.transform = "translateY(50px)";
-    card.style.transition = "0.6s ease";
-    projectObserver.observe(card);
-});
-
-
-document.querySelector(".contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    alert("Message envoyé !");
-});
+// On demande à l'observer de surveiller toutes les sections, y compris le hero d'accueil.
+sections.forEach(section => observer.observe(section));
+// new Date() donne la date actuelle ; getFullYear extrait l'année. textContent écrit du texte sûr.
+document.querySelector('#year').textContent = new Date().getFullYear();

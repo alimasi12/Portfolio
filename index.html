@@ -1,271 +1,162 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- Indique au navigateur que ce document utilise la norme HTML5. -->
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Alimasi, développeur web">
-    <title>Alimasi Bondo</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <!-- "head" contient les informations techniques invisibles de la page. -->
+  <!-- UTF-8 permet d'afficher correctement les accents et caractères français. -->
+  <meta charset="UTF-8">
+  <!-- Rend la mise en page adaptée à la largeur réelle d'un téléphone ou d'une tablette. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Description lue notamment par les moteurs de recherche. -->
+  <meta name="description" content="Portfolio de Alimasi Bondo, développeur web junior à Kinshasa.">
+  <!-- Couleur affichée par certains navigateurs mobiles autour de l'interface. -->
+  <meta name="theme-color" content="#0b0d12">
+  <!-- Texte affiché dans l'onglet du navigateur. -->
+  <title>Alimasi Bondo — Développeur web</title>
+  <!-- Prépare la connexion au CDN : les icônes pourront charger plus vite. -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <!-- Bibliothèque d'icônes. "rel=stylesheet" signifie que ce lien charge du CSS. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer">
+  <!-- Notre feuille de style locale : elle personnalise entièrement le portfolio. -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Lien invisible au départ, utile au clavier : il permet de sauter le menu. -->
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
 
-<header id="ac" class="hero">
-    <nav class="navbar">
-        <h1 class="logo">ALIMASI</h1>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#ac">Accueil</a></li>
-            <li><a href="#apropos">À propos</a></li>
-            <li><a href="#comp">Compétences</a></li>
-            <li><a href="#service">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="burger" id="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+  <!-- header est l'en-tête visuel de la page. Son id permet aux liens #accueil d'y arriver. -->
+  <header class="hero" id="accueil">
+    <!-- nav est réservé à la navigation. aria-label précise son rôle aux lecteurs d'écran. -->
+    <nav class="navbar" aria-label="Navigation principale">
+      <!-- Le logo est aussi un lien de retour vers le haut de la page. -->
+      <a class="logo" href="#accueil" aria-label="Retour à l'accueil">AB<span>.</span></a>
+      <!-- button est préférable à un div cliquable : il fonctionne au clavier par défaut.
+           aria-expanded sera modifié par JavaScript pour annoncer si le menu est ouvert.
+           aria-controls associe ce bouton à la liste ayant l'id navLinks. -->
+      <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <!-- ul est une liste ; chaque li est un élément du menu. Les href commençant par #
+           pointent vers les id des sections de cette même page. -->
+      <ul class="nav-links" id="navLinks">
+        <li><a class="nav-link active" href="#accueil">Accueil</a></li>
+        <li><a class="nav-link" href="#apropos">À propos</a></li>
+        <li><a class="nav-link" href="#competences">Compétences</a></li>
+        <li><a class="nav-link" href="#projets">Projets</a></li>
+        <li><a class="nav-link nav-contact" href="#contact">Contact</a></li>
+      </ul>
     </nav>
 
+    <!-- Le contenu principal de l'en-tête : accroche, présentation et appels à l'action. -->
     <div class="hero-content">
-        <h1>Salut, je suis <span class="span1">Alimasi Bondo</span></h1>
-
-        <div class="social-icons">
-            <a href="mailto:bondoalimasi@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/alimasi12"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/bondo-alimasi-985a92360"><i class="fab fa-linkedin"></i></a>
-        </div>
-
-        <p><span id="typewriter" class="typewriter"></span></p>
-
-        <a href="CV-Alimasi_Bondo.pdf" class="btn" target="_blank">
-            Télécharger mon CV
-        </a>
+      <!-- p est un paragraphe. La classe eyebrow le transforme visuellement en petit surtitre. -->
+      <p class="eyebrow">Développeur web junior · RDC, Ituri/Bunia</p>
+      <h1>Je conçois des expériences web <span>simples, rapides et soignées.</span></h1>
+      <p class="hero-copy">Je suis Alimasi Bondo, étudiant passionné par le web. J'utilise HTML, CSS et JavaScript pour transformer une idée en interface claire et responsive.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#projets">Voir mon travail <i class="fa-solid fa-arrow-down"></i></a>
+        <a class="button button-secondary" href="CV-Alimasi_Bondo.pdf" target="_blank" rel="noopener">Voir mon CV <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+      <div class="social-links" aria-label="Réseaux sociaux">
+        <a href="mailto:bondoalimasi@gmail.com" aria-label="Envoyer un e-mail"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://github.com/alimasi12" target="_blank" rel="noopener" aria-label="Profil GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/bondo-alimasi-985a92360" target="_blank" rel="noopener" aria-label="Profil LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
     </div>
-</header>
+    <!-- Indication décorative et cliquable pour encourager le défilement. -->
+    <a class="scroll-cue" href="#apropos">Défiler <span></span></a>
+  </header>
 
-<section id="apropos" class="about">
-    <div class="about-container">
-        <div class="about-image">
-            <img src="profile.png" alt="Photo de Alimasi">
+  <!-- main regroupe le contenu unique de cette page. L'id est la destination du skip-link. -->
+  <main id="main-content">
+    <!-- section délimite une partie thématique. Chaque section possède un id navigable. -->
+    <section class="section about" id="apropos">
+      <!-- img doit toujours avoir un alt : ici il décrit l'image aux personnes qui ne la voient pas. -->
+      <div class="about-photo"><img src="profile.png" alt="Portrait de Alimasi Bondo"></div>
+      <div class="about-copy">
+        <p class="eyebrow">À propos</p>
+        <h2>Un développeur curieux, attentif aux détails.</h2>
+        <p>Je suis étudiant et développeur web junior. Mon objectif : créer des sites agréables à parcourir, utiles et accessibles sur tous les écrans.</p>
+        <p>Je consolide mes compétences à travers des projets personnels et des exercices pratiques. Mon parcours en électrotechnique m'a aussi apporté une approche méthodique de la résolution de problèmes.</p>
+        <dl class="details">
+          <div><dt>Localisation</dt><dd>Bunia, RDC</dd></div>
+          <div><dt>Disponibilité</dt><dd>Projets & collaborations</dd></div>
+          <div><dt>E-mail</dt><dd><a href="mailto:bondoalimasi@gmail.com">bondoalimasi@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- La section compétences utilise des articles indépendants, un choix sémantique adapté
+         à des cartes qui peuvent être comprises séparément. -->
+    <section class="section skills" id="competences">
+      <div class="section-heading">
+        <p class="eyebrow">Compétences</p>
+        <h2>Les outils que j'utilise pour construire le web.</h2>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-card"><i class="fa-brands fa-html5"></i><h3>HTML5</h3><p>Structure sémantique, formulaires et bonnes bases d'accessibilité.</p></article>
+        <article class="skill-card"><i class="fa-brands fa-css3-alt"></i><h3>CSS3</h3><p>Mises en page responsive, animations et interfaces soignées.</p></article>
+        <article class="skill-card"><i class="fa-brands fa-js"></i><h3>JavaScript</h3><p>Interactions, navigation mobile et comportements côté navigateur.</p></article>
+      </div>
+    </section>
+
+    <!-- Cette section présente un projet réel ; elle évite de promettre des projets inexistants. -->
+    <section class="section projects" id="projets">
+      <div class="section-heading">
+        <p class="eyebrow">Projet sélectionné</p>
+        <h2>Du code propre, avec une attention portée à l'expérience.</h2>
+      </div>
+      <article class="project-card">
+        <div class="project-preview" aria-hidden="true">
+          <div class="preview-bar"><i></i><i></i><i></i></div>
+          <div class="preview-content"><span class="preview-tag">PORTFOLIO</span><strong>Alimasi<br>Bondo<span>.</span></strong><em></em><em></em></div>
         </div>
-
-        <div class="about-content">
-            <p>
-    Je suis <strong>Alimasi Bondo</strong>, étudiant passionné par le développement web et les technologies numériques.
-</p>
-
-<p>
-    Je crée des sites web modernes et responsives en utilisant <strong>HTML</strong>, <strong>CSS</strong> et <strong>JavaScript</strong>.
-    J’améliore constamment mes compétences à travers des projets personnels et des exercices pratiques.
-</p>
-
-<p>
-    J’ai également des connaissances en électrotechnique, notamment dans la compréhension des systèmes électriques et la lecture de schémas techniques.
-</p>
-
-<div class="about-info">
-    <p><strong>Nom :</strong> Alimasi Bondo</p>
-    <p><strong>Statut :</strong> Étudiant / Développeur web junior</p>
-    <p><strong>Email :</strong> bondoalimasi@gmail.com</p>
-    <p><strong>Localisation :</strong> République Démocratique du Congo</p>
-</div>
-
-            <a href="CV-Alimasi_Bondo.pdf" download class="btn">
-                Télécharger mon CV
-            </a>
+        <div class="project-content">
+          <p class="project-number">01 / 01</p>
+          <h3>Portfolio personnel</h3>
+          <p>Un site vitrine personnel conçu pour présenter mon profil, mes compétences et mes coordonnées. Il s'adapte aux écrans mobiles et inclut une navigation fluide.</p>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive</li></ul>
+          <a class="text-link" href="https://github.com/alimasi12/Portfolio" target="_blank" rel="noopener">Voir le code sur GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
-    </div>
-</section>
+      </article>
+      <div class="project-note"><i class="fa-solid fa-sparkles"></i><p>D'autres réalisations arrivent bientôt. Vous avez une idée de site ? <a href="#contact">Parlons-en.</a></p></div>
+    </section>
 
-<section id="comp" class="skills">
-    <h2 class="section-title">Mes Compétences</h2>
+    <!-- Section de contact avec un vrai formulaire HTML. -->
+    <section class="section contact" id="contact">
+      <div class="contact-intro">
+        <p class="eyebrow">Contact</p>
+        <h2>Construisons quelque chose d'utile.</h2>
+        <p>Pour une question, un projet ou une collaboration, écrivez-moi. Je vous répondrai dès que possible.</p>
+        <a class="contact-email" href="mailto:bondoalimasi@gmail.com">bondoalimasi@gmail.com <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+      <!-- action est l'adresse qui reçoit les données ; method="POST" les envoie dans le corps
+           de la requête. Formspree traite l'envoi sans qu'il soit nécessaire de créer un serveur. -->
+      <form class="contact-form" action="https://formspree.io/f/mgorlqrj" method="POST">
+        <!-- label est lié à son champ car il l'englobe : un clic sur le texte active le champ.
+             required empêche l'envoi d'un champ vide ; autocomplete aide le navigateur à remplir. -->
+        <label>Votre nom<input type="text" name="name" autocomplete="name" required></label>
+        <label>Votre e-mail<input type="email" name="email" autocomplete="email" required></label>
+        <label>Votre message<textarea name="message" rows="5" required></textarea></label>
+        <button class="button button-primary" type="submit">Envoyer le message <i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </section>
+  </main>
 
-    <div class="skills-grid">
-
-        <div class="skill-card">
-            <i class="fab fa-html5"></i>
-            <h3>HTML</h3>
-            <div class="skill-bar">
-                <div class="skill-fill html"></div>
-            </div>
-            <span>90%</span>
-        </div>
-
-        <div class="skill-card">
-            <i class="fab fa-css3-alt"></i>
-            <h3>CSS</h3>
-            <div class="skill-bar">
-                <div class="skill-fill css"></div>
-            </div>
-            <span>85%</span>
-        </div>
-
-        <div class="skill-card">
-            <i class="fab fa-js"></i>
-            <h3>JavaScript</h3>
-            <div class="skill-bar">
-                <div class="skill-fill js"></div>
-            </div>
-            <span>70%</span>
-        </div>
-
-    </div>
-</section>
-
-
-<section id="service" class="services">
-    <h2 class="section-title">Mes Services</h2>
-
-    <div class="services-grid">
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-code"></i>
-            </div>
-            <h3>Création de sites web</h3>
-            <p>Je conçois des sites modernes, rapides et adaptés à tous les écrans.</p>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3>Design Responsive</h3>
-            <p>Votre site sera parfaitement optimisé pour mobile, tablette et ordinateur.</p>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-bolt"></i>
-            </div>
-            <h3>Optimisation performance</h3>
-            <p>Amélioration de la vitesse et de l’expérience utilisateur de votre site.</p>
-        </div>
-
-    </div>
-</section>
-
-
-<section id="portfolio" class="portfolio">
-    <h2 class="section-title">Mes Projets</h2>
-
-    <div class="portfolio-grid">
-
-        <div class="project-card">
-            <img src="project1.jpg" alt="Projet 1">
-            <div class="project-overlay">
-                <h3>Site Restaurant</h3>
-                <p>HTML / CSS / JS</p>
-                <a href="#" class="project-btn">Voir projet</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <img src="project2.jpg" alt="Projet 2">
-            <div class="project-overlay">
-                <h3>Landing Page</h3>
-                <p>Design moderne</p>
-                <a href="#" class="project-btn">Voir projet</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <img src="project3.jpg" alt="Projet 3">
-            <div class="project-overlay">
-                <h3>Portfolio</h3>
-                <p>Responsive</p>
-                <a href="#" class="project-btn">Voir projet</a>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<section id="contact" class="contact">
-    <h2 class="section-title">Contactez-moi</h2>
-
-    <div class="contact-container">
-
-        <!-- Infos -->
-        <div class="contact-info">
-            <h3>Restons en contact</h3>
-            <p>Tu peux m’envoyer un message pour tout projet ou collaboration.</p>
-
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
-                <span>bondoalimasi@gmail.com</span>
-            </div>
-
-            <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>RDC - Kinshasa</span>
-            </div>
-
-        </div>
-
-        <!-- Formulaire -->
-        <form class="contact-form" action="https://formspree.io/f/mgorlqrj" method="POST">
-    
-    <input type="text" name="name" placeholder="Ton nom" required>
-
-    <input type="email" name="email" placeholder="Ton email" required>
-
-    <textarea name="message" placeholder="Ton message" rows="6" required></textarea>
-
-    <button type="submit">Envoyer</button>
-
-</form>
-        <!--<form class="contact-form" action="https://formspree.io/f/mgorlqrj" method="POST">
-            <input type="text" placeholder="Ton nom" required>
-            <input type="email" placeholder="Ton email" required>
-            <textarea placeholder="Ton message" rows="6" required></textarea>
-            <button type="submit">Envoyer</button>
-        </form>-->
-
-    </div>
-</section>
-
-
-<footer class="footer">
-
-    <div class="footer-container">
-
-        <div class="footer-brand">
-            <h2>ALIMASI</h2>
-            <p>Développeur web passionné, créant des sites modernes et responsives.</p>
-        </div>
-
-        <div class="footer-links">
-            <h3>Liens rapides</h3>
-            <a href="#ac">Accueil</a>
-            <a href="#apropos">À propos</a>
-            <a href="#comp">Compétences</a>
-            <a href="#service">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
-        </div>
-
-        <div class="footer-social">
-            <h3>Réseaux</h3>
-            <a href="mailto:bondoalimasi@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/alimasi12"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        <p>© 2026 ALIMASI. Tous droits réservés.</p>
-    </div>
-
-</footer>
-
-<script src="script.js"></script>
+  <!-- footer est le pied de page. Le span #year est rempli automatiquement par JavaScript. -->
+  <footer class="footer"><a class="logo" href="#accueil">AB<span>.</span></a><p>© <span id="year"></span> Alimasi Bondo. Tous droits réservés.</p><a href="#accueil" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></a></footer>
+  <!-- Le script est placé à la fin : le HTML est donc déjà créé quand JavaScript s'exécute. -->
+  <script src="script.js"></script>
 </body>
 </html>
+      <!-- h1 est le titre le plus important : il ne devrait y en avoir qu'un par page. -->
+      <!-- Deux liens présentés comme des boutons grâce à la classe CSS button. -->
+      <!-- Liens externes : target="_blank" ouvre un nouvel onglet ; rel="noopener"
+           protège la page d'origine quand le nouvel onglet est ouvert. -->
+      <!-- div est un conteneur neutre : il sert ici à grouper le texte de présentation. -->
+        <!-- h2 est le titre de niveau 2 d'une grande section. -->
+        <!-- dl (description list) associe des termes dt à leurs valeurs dd. -->
+        <!-- i porte l'icône Font Awesome. Ici, le titre h3 porte déjà l'information importante. -->
+        <!-- La prévisualisation est volontairement construite avec du HTML/CSS : aria-hidden
+             indique qu'elle est décorative, car la vraie information est dans le texte suivant. -->
+          <!-- ul est ici une liste de technologies, lisible aussi sans style CSS. -->
